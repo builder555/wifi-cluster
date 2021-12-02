@@ -1,0 +1,19 @@
+version: "2.1"
+
+services:
+  wifimod:
+    build: .
+    privileged: true
+    network_mode: "host"
+    labels:
+      io.balena.features.supervisor-api: 1
+      io.balena.features.dbus: 1
+      io.balena.features.sysfs: 1
+      
+  hostname:
+    image: balenablocks/hostname
+    restart: no                               # Required to avoid container restarting indefinitely
+    labels:
+      io.balena.features.supervisor-api: 1    # Required to interact with the supervisor
+    environment:
+      SET_HOSTNAME: imxdev
