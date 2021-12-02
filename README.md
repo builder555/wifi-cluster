@@ -18,7 +18,21 @@ _Why?_
 
 _Requirements:_
  - The chip must support AP+STA operation (i.e. can connect to a wifi network and create its own AP simultaneously).
- - Runs on Linux
+ - Runs on Linux (balenaOS)
+ - balena cli
 
 _Supported devices:_
 - Intel AC 8265
+
+### Deploying
+
+```bash
+$ balena push <deviceID>.local
+```
+
+### Run it
+
+```
+$ balena ssh <deviceID>.local wifimod
+# python mgr.py
+```
