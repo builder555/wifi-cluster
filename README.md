@@ -1,7 +1,8 @@
-## WiFi Cluster
+# WiFi Cluster
 
 ### Connect multiple wifi-enabled devices to each other and to external WiFi using a single connection.
 
+<br>
 Can create star configuration:
 
 <pre>
