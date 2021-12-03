@@ -4,10 +4,9 @@ import dbus.mainloop.glib
 import NetworkManager
 import uuid
 import logging
-import os
 
 MASTER_SSID = "EtcherProAP"
-MASTER_PSK = "qy4h8wegAWYE2362"
+MASTER_PSK = "super-secure-pass"
 
 
 def add_internal_ap_connection(ssid: str, psk: str) -> None:
@@ -147,15 +146,19 @@ def is_master_present() -> bool:
 
 def become_master() -> None:
     logging.debug("becoming master")
+    subprocess.run("iw dev wlan1 del >/dev/null 2>&1", shell=True)
+    subprocess.run("ip link set wlan0 down >/dev/null 2>&1", shell=True)
     device = get_wifi_device("wlan1")
     if not device:
         logging.debug("adding wlan1 interface")
-        os.system("iw dev wlan0 interface add wlan1 type __ap")
+        subprocess.run("iw dev wlan0 interface add wlan1 type __ap", shell=True)
         device = get_wifi_device("wlan1")
     connection = get_internal_ap_connection(MASTER_SSID)
     if not connection:
         add_internal_ap_connection(MASTER_SSID, MASTER_PSK)
         connection = get_internal_ap_connection(MASTER_SSID)
+    subprocess.run("ip link set wlan1 up >/dev/null 2>&1", shell=True)
+    subprocess.run("ip link set wlan0 up >/dev/null 2>&1", shell=True)
     NetworkManager.NetworkManager.ActivateConnection(connection, device, "/")
     logging.debug("became master")
 
