@@ -36,3 +36,19 @@ $ balena push <deviceID>.local
 $ balena ssh <deviceID>.local wifimod
 # python mgr.py
 ```
+
+___OR___
+```
+$ scp mgr.py <yourdeviceip>:
+$ ssh <yourdeviceip>
+$ python mgr.py
+```
+---
+
+### Known Issues
+- have to manually take down wlan1 and re-add it after reboot
+
+### TODO
+- handle "wifi device is off" case
+- create different configurations (mesh, chain, star, clusters, ring)
+- tests
