@@ -1,3 +1,8 @@
+### Check if your device supports AP mode
+
+`iw phy | grep -i "supported interface" -A10`
+
+
 ### Commands to add a virtual wifi device as AP and activate a connection:
 
 ```bash
