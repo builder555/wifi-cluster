@@ -15,6 +15,7 @@ dev1  dev2  dev3
 _Why?_
 - Reduce the load on WiFi if devices only need to communicate with each other.
 - Allow adding multiple devices if only one is authorized to connect to WiFi
+- Can run in a docker container
 
 _Requirements:_
  - The chip must support AP+STA operation (i.e. can connect to a wifi network and create its own AP simultaneously).
@@ -49,6 +50,24 @@ $ python mgr.py
 - have to manually take down wlan1 and re-add it after reboot
 
 ### TODO
-- handle "wifi device is off" case
-- create different configurations (mesh, chain, star, clusters, ring)
-- tests
+- [x] can create wifi 
+- [x] can connect to wifi
+- [x] access internet through wifi
+- [x] * create wifi after reboot --> _yes, but need to re-add wlan1 interface_
+- [x] add lan interface from within a container
+- [x] activate existing wifi from within a container
+- [x] deactivate wifi from within a container
+- [x] create new wifi connection from within a container
+- [x] list available connections from container
+- [x] connect to master wifi automatically
+- [x] can become master
+- [x] can become slave
+- [ ] <font color="red">remove/re-add virtual wlan1 interface if it's unavailable</font>
+- [ ] can turn on physical wifi device, if it's off
+- [ ] tests
+- [ ] create different configurations: 
+    - [x] star
+    - [ ] mesh
+    - [ ] chain
+    - [ ] clusters
+    - [ ] ring
