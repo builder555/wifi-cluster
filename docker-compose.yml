@@ -1,7 +1,7 @@
 version: "2.1"
 
 services:
-  wifimod:
+  wifimesh:
     build: .
     privileged: true
     network_mode: "host"
@@ -9,11 +9,18 @@ services:
       io.balena.features.supervisor-api: 1
       io.balena.features.dbus: 1
       io.balena.features.sysfs: 1
-      
-  hostname:
-    image: balenablocks/hostname
-    restart: no                               # Required to avoid container restarting indefinitely
-    labels:
-      io.balena.features.supervisor-api: 1    # Required to interact with the supervisor
     environment:
-      SET_HOSTNAME: imxdev
+      - SSID=EtcherProAP
+      - PSK=12233344445
+
+  testsrv:
+    build: ./test
+    ports:
+      - "8000:8000"
+  # hostname:
+  #   image: balenablocks/hostname
+  #   restart: no                               # Required to avoid container restarting indefinitely
+  #   labels:
+  #     io.balena.features.supervisor-api: 1    # Required to interact with the supervisor
+  #   environment:
+  #     SET_HOSTNAME: imxdev

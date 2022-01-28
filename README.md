@@ -13,7 +13,7 @@ dev1  dev2  dev3
 </pre>
 
 _Why?_
-- Reduce the load on WiFi if devices only need to communicate with each other.
+- Reduce the load on the host WiFi if devices only need to communicate with each other.
 - Allow adding multiple devices if only one is authorized to connect to WiFi
 - Can run in a docker container
 
@@ -27,33 +27,27 @@ _Supported devices:_
 
 ### Deploying
 
+#### Balena device:
+
+*NB*: The device needs to be in [local mode](https://www.balena.io/docs/learn/develop/local-mode/) for these commands to work:
+
 ```bash
 $ balena push <deviceID>.local
 ```
 
-### Run it
-
+#### Any linux-based device:
 ```
-$ balena ssh <deviceID>.local wifimod
-# python mgr.py
-```
-
-___OR___
-```
-$ scp mgr.py <yourdeviceip>:
+$ scp mesh.sh <yourdeviceip>:
 $ ssh <yourdeviceip>
-$ python mgr.py
+# sh mesh.sh
 ```
 ---
-
-### Known Issues
-- have to manually take down wlan1 and re-add it after reboot
 
 ### TODO
 - [x] can create wifi 
 - [x] can connect to wifi
 - [x] access internet through wifi
-- [x] * create wifi after reboot --> _yes, but need to re-add wlan1 interface_
+- [x] create wifi after reboot
 - [x] add lan interface from within a container
 - [x] activate existing wifi from within a container
 - [x] deactivate wifi from within a container
@@ -62,8 +56,9 @@ $ python mgr.py
 - [x] connect to master wifi automatically
 - [x] can become master
 - [x] can become slave
-- [ ] <font color="red">remove/re-add virtual wlan1 interface if it's unavailable</font>
-- [ ] can turn on physical wifi device, if it's off
+- [x] remove/re-add virtual wlan1 interface if it's unavailable
+- [x] can turn on physical wifi device, if it's off
+- [x] use ENV vars for configuration
 - [ ] tests
 - [ ] create different configurations: 
     - [x] star

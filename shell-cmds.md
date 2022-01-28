@@ -29,10 +29,22 @@ ifconfig wlan0 up
 
 ```bash
 # nmcli con up MYAP1
-# inside a docker container:
 ip link set wlan1 up
 ip link set wlan0 up
 
 # to delete wlan1:
 iw dev wlan1 del
+```
+
+### Connect to wifi
+
+```bash
+nmcli dev wifi connect EtcherProAP password 12233344445
+```
+
+### Connect/Disconnect a specific device from wifi:
+
+```bash
+nmcli dev con wlan0
+nmcli dev dis wlan0
 ```
